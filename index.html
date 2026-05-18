@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bombay Surplus Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0a0a0a;
+      --muted:#666;
+      --soft:#f6f3ec;
+      --gold:#c8a96a;
+      --line:#e9e2d4;
+      --shadow:0 16px 40px rgba(10,10,10,.06);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1180px,92vw);margin:0 auto}
+    .nav{
+      position:sticky;top:0;z-index:20;
+      background:rgba(255,255,255,.85);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(201,169,106,.18);
+    }
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 0;
+    }
+    .brand{
+      display:flex;flex-direction:column;gap:2px;
+      font-family:'Playfair Display',serif;
+      line-height:1;
+    }
+    .brand strong{font-size:22px;letter-spacing:.5px}
+    .brand span{font-family:'Inter',sans-serif;color:var(--gold);font-size:12px;letter-spacing:3px;text-transform:uppercase}
+    .menu{display:flex;gap:26px;flex-wrap:wrap;justify-content:flex-end}
+    .menu a{font-size:13px;color:#3b3b3b;letter-spacing:.5px}
+    .menu a:hover{color:var(--gold)}
+
+    .hero,
+    .section{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding:96px 0;
+    }
+    .hero-grid,
+    .section-grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:48px;
+      align-items:center;
+      width:100%;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:12px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:18px;
+    }
+    .eyebrow::before{
+      content:"";
+      width:34px;height:1px;background:var(--gold);display:inline-block
+    }
+    h1,h2,h3{font-family:'Playfair Display',serif;margin:0}
+    .hero h1{
+      font-size:clamp(52px,8vw,92px);
+      line-height:.95;
+      letter-spacing:1px;
+      max-width:8ch;
+    }
+    .hero h1 span,.section h2 span{color:var(--gold)}
+    .lead{
+      margin:24px 0 0;
+      font-size:18px;
+      line-height:1.8;
+      color:var(--muted);
+      max-width:620px;
+    }
+    .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:48px;padding:0 22px;border-radius:999px;
+      border:1px solid var(--gold);font-size:14px;letter-spacing:1px;
+      text-transform:uppercase;transition:.25s ease;
+    }
+    .btn.primary{background:var(--gold);color:#fff}
+    .btn.primary:hover{filter:brightness(.95);transform:translateY(-1px)}
+    .btn.secondary{background:transparent;color:var(--gold)}
+    .btn.secondary:hover{background:rgba(200,169,106,.08)}
+
+    .hero-card,
+    .info-card{
+      background:linear-gradient(180deg,#fff, #fbf8f2);
+      border:1px solid rgba(201,169,106,.2);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:28px;
+    }
+    .hero-card{position:relative;overflow:hidden}
+    .hero-card::before{
+      content:"";position:absolute;inset:auto -20% -25% auto;width:240px;height:240px;
+      background:radial-gradient(circle, rgba(200,169,106,.18), transparent 68%);
+      border-radius:50%;pointer-events:none;
+    }
+    .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .stat{
+      background:rgba(255,255,255,.8);
+      border:1px solid var(--line);
+      border-radius:20px;padding:18px;min-height:110px
+    }
+    .stat b{display:block;font-size:30px;font-family:'Playfair Display',serif;margin-bottom:8px}
+    .stat span{font-size:13px;color:var(--muted);line-height:1.6}
+    .section{background:#fff}
+    .section.alt{background:var(--soft)}
+    .section h2{font-size:clamp(38px,5vw,64px);line-height:1.02;max-width:10ch}
+    .section-copy{max-width:620px}
+    .section-copy p{margin:20px 0 0;color:var(--muted);line-height:1.8;font-size:17px}
+    .cards{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px
+    }
+    .card{
+      background:#fff;border:1px solid rgba(200,169,106,.2);border-radius:22px;
+      padding:24px;box-shadow:var(--shadow);min-height:140px
+    }
+    .card h3{font-size:22px;margin-bottom:10px}
+    .card p{margin:0;color:var(--muted);line-height:1.7}
+    .list{
+      margin-top:28px;border-top:1px solid var(--line);padding-top:22px
+    }
+    .list-item{
+      display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(233,226,212,.7)
+    }
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);margin-top:8px;flex:none}
+    .list-item strong{display:block;margin-bottom:4px}
+    .list-item span{color:var(--muted);line-height:1.65}
+    .split{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px
+    }
+    .panel{
+      padding:26px;border-radius:22px;background:#fff;border:1px solid rgba(200,169,106,.2);box-shadow:var(--shadow)
+    }
+    .panel h3{font-size:24px;margin-bottom:12px}
+    .panel p,.panel li{color:var(--muted);line-height:1.75}
+    .panel ul{margin:0;padding-left:18px}
+    .contact-box{
+      background:linear-gradient(180deg,#fff, #faf6ee);
+      border:1px solid rgba(200,169,106,.22);
+      border-radius:28px;padding:32px;box-shadow:var(--shadow)
+    }
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+    .field{display:flex;flex-direction:column;gap:8px}
+    label{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#7a6a4b}
+    input,textarea{
+      width:100%;border:1px solid var(--line);border-radius:16px;padding:14px 16px;
+      font:inherit;background:#fff;outline:none
+    }
+    textarea{min-height:150px;resize:vertical}
+    input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(200,169,106,.12)}
+    .footer{
+      padding:28px 0 42px;
+      border-top:1px solid rgba(201,169,106,.2);
+      color:#7b7b7b;font-size:13px
+    }
+    @media (max-width: 920px){
+      .hero-grid,.section-grid,.split,.contact-grid,.cards,.stat-grid{grid-template-columns:1fr}
+      .menu{display:none}
+      .hero,.section{padding:72px 0;min-height:auto}
+      .hero h1{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <strong>Bombay Surplus Co.</strong>
+        <span>Export Surplus Apparel</span>
+      </div>
+      <nav class="menu">
+        <a href="#home">Home</a>
+        <a href="#offering">Offering</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Global Apparel Supply</div>
+          <h1>Bombay <span>Surplus Co.</span></h1>
+          <p class="lead">Export surplus apparel sourced from manufacturers and factories across India. Fresh stocklots, bulk-ready inventory, and pricing designed to create stronger margins for retailers, wholesalers, and importers.</p>
+          <div class="actions">
+            <a class="btn primary" href="#contact">Request Catalogue</a>
+            <a class="btn secondary" href="#offering">View Offering</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <div class="stat-grid">
+            <div class="stat"><b>4</b><span>Core product categories: menswear, womenswear, household, accessories</span></div>
+            <div class="stat"><b>100%</b><span>Fresh stocklot sourcing with export-ready stock handling</span></div>
+            <div class="stat"><b>Bulk</b><span>Built for wholesale buyers and repeat orders</span></div>
+            <div class="stat"><b>Global</b><span>Positioned for international trade show and export opportunities</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section alt" id="offering">
+      <div class="container section-grid">
+        <div class="section-copy">
+          <div class="eyebrow">What We Supply</div>
+          <h2>Our <span>Offering</span></h2>
+          <p>We specialise in sourcing export surplus stocklots directly from manufacturers and factories. Our inventory includes menswear, womenswear, household goods and accessories — all fresh, bulk-ready and competitively priced for global buyers.</p>
+          <div class="actions">
+            <a class="btn primary" href="#contact">Speak to Us</a>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="card"><h3>Menswear</h3><p>T-shirts, shirts, denim, hoodies and everyday essentials.</p></div>
+          <div class="card"><h3>Womenswear</h3><p>Dresses, tops, co-ords and fast-moving fashion pieces.</p></div>
+          <div class="card"><h3>Household</h3><p>Textiles, utility products and home essentials.</p></div>
+          <div class="card"><h3>Accessories</h3><p>Bags, add-ons and complementary retail products.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container section-grid">
+        <div>
+          <div class="eyebrow">How It Works</div>
+          <h2>A simple, clear <span>buying process</span></h2>
+          <p class="lead">From enquiry to dispatch, the process is kept efficient and buyer-friendly. You receive relevant inventory options, pricing, and a straightforward way to move from interest to order.</p>
+        </div>
+        <div class="panel">
+          <h3>3-Step Process</h3>
+          <ul>
+            <li>Share your category, quantity, and target price range.</li>
+            <li>Receive matched stocklot options and availability details.</li>
+            <li>Confirm your order and move forward with dispatch planning.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="about">
+      <div class="container split">
+        <div class="panel">
+          <h3>Why Buyers Work With Us</h3>
+          <p>We focus on fresh stock, reliable sourcing, and strong value. The goal is simple: help buyers access attractive inventory at pricing that leaves room for healthy retail margins.</p>
+        </div>
+        <div class="panel">
+          <h3>What Makes Us Different</h3>
+          <p>We keep the brand clean, the communication direct, and the supply structure easy to work with — so buyers can make quick decisions with confidence.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-box">
+        <div class="eyebrow">Contact</div>
+        <h2>Let’s <span>connect</span></h2>
+        <p class="lead">Use this section for enquiries, catalogue requests, and trade show introductions. Add your email, WhatsApp, and location once ready.</p>
+        <div class="contact-grid">
+          <div class="field"><label>Name</label><input type="text" placeholder="Your name"></div>
+          <div class="field"><label>Email</label><input type="email" placeholder="Your email"></div>
+          <div class="field"><label>Company</label><input type="text" placeholder="Company name"></div>
+          <div class="field"><label>Phone / WhatsApp</label><input type="text" placeholder="Phone number"></div>
+          <div class="field" style="grid-column:1/-1"><label>Message</label><textarea placeholder="Tell us what you are looking for..."></textarea></div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="#">Send Enquiry</a>
+          <a class="btn secondary" href="mailto:info@bombaysurplusco.com">Email Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Bombay Surplus Co. All rights reserved.</div>
+  </footer>
+</body>
+</html>
+
